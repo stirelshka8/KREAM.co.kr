@@ -74,16 +74,3 @@ def _extract_data():
         counter += 1
 
     return export_list
-
-
-def save_file():
-    """
-    УСТАРЕВШАЯ ФУНКЦИЯ!!!
-
-    Функция сохраняет вывод функции _extract_data в файл .xlsx
-    """
-    df = pd.DataFrame(_extract_data(), columns=['ССЫЛКА', 'НАИМЕНОВАНИЕ', 'АРТИКУЛ', 'ПОСЛЕДНЕЕ ПРЕДЛОЖЕНИЕ',
-                                                'ПОСЛЕДНЯЯ ЦЕНА ПРОДАЖИ', 'ДАТА ВЫПУСКА', 'КОЛИЧЕСТВО ЖЕЛАЮЩИХ'])
-    writer = pd.ExcelWriter(f"{config['CONFIG']['save']}.xlsx", engine='xlsxwriter')
-    df.to_excel(writer, sheet_name=search, index=True)
-    writer.save()

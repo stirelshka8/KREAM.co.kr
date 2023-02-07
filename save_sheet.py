@@ -16,7 +16,7 @@ enter_datatime = f"{datetime.now().day}-" \
 columns = ['ССЫЛКА', 'НАИМЕНОВАНИЕ', 'АРТИКУЛ', 'ПОСЛЕДНЕЕ ПРЕДЛОЖЕНИЕ', 'ПОСЛЕДНЯЯ ЦЕНА ПРОДАЖИ', 'ДАТА ВЫПУСКА',
            'КОЛИЧЕСТВО ЖЕЛАЮЩИХ']
 
-FILE_NAME = config['CONFIG']['save']
+FILE_NAME = f"{config['CONFIG']['save']}.xlsx"
 SHEET_NAME = f"{config['CONFIG']['search']}_{enter_datatime}"
 
 
