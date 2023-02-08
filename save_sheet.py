@@ -27,8 +27,8 @@ def save():
         wb = openpyxl.Workbook()
 
         for sheet_name in wb.sheetnames:
-            sheet = wb.get_sheet_by_name(sheet_name)
-            wb.remove_sheet(sheet)
+            sheet = wb[f"{sheet_name}"]
+            wb.remove(sheet)
 
     ws = wb.create_sheet(SHEET_NAME)
 
@@ -40,3 +40,4 @@ def save():
             ws.cell(row=i, column=j).value = value
 
     save_workbook(wb, f"{config['CONFIG']['save']}.xlsx")
+
