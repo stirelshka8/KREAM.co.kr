@@ -39,10 +39,18 @@ def data_extraction():
 
 def comparison():
     penultimate_, last_ = data_extraction()
+    last_step = 0
 
-    for step in range(0, len(max(penultimate_, last_))):
-        if last_[step] != penultimate_[step]:
-            print(f"{last_[step]} ----------- {penultimate_[step]}")
+    while last_step < len(max(penultimate_, last_)):
+        for step in range(0, len(max(penultimate_, last_))):
+            if penultimate_[step] != last_[last_step]:
+                print(last_step)
+                print(step)
+            last_step += 1
+
+
+
+
 
 
 if __name__ == "__main__":
