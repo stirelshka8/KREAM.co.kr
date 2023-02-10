@@ -1,5 +1,6 @@
 import xlrd
 import configparser
+from save_sheet import save
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -11,7 +12,7 @@ read_sheet_last = read_book.sheet_by_index(number_sheets)
 
 
 def data_extraction():
-    if len(read_book.sheet_names()) > 2:
+    if len(read_book.sheet_names()) >= 1:
         penultimate_list = []
         last_list = []
         for iter_line in (range(1, max(read_sheet_penultimate.nrows, read_sheet_last.nrows))):
@@ -20,7 +21,8 @@ def data_extraction():
 
             for iter_column in range(0, 7):
                 if iter_line >= read_sheet_penultimate.nrows:
-                    penultimate_list_temp.append(read_sheet_penultimate.cell_value(iter_line - 1, iter_column))
+                    penultimate_list_temp.append(
+                        read_sheet_penultimate.cell_value(read_sheet_penultimate.nrows, iter_column))
                 else:
                     penultimate_list_temp.append(read_sheet_penultimate.cell_value(iter_line, iter_column))
 
@@ -35,22 +37,15 @@ def data_extraction():
         return penultimate_list, last_list
     else:
         print("Для анализа данных необходимо минимум 2 листа данных!!!")
+        save()
 
 
 def comparison():
     penultimate_, last_ = data_extraction()
-    last_step = 0
-
-    while last_step < len(max(penultimate_, last_)):
-        for step in range(0, len(max(penultimate_, last_))):
-            if penultimate_[step] != last_[last_step]:
-                print(last_step)
-                print(step)
-            last_step += 1
-
-
-
-
+    for val_penultimate in penultimate_:
+        for val_last in last_:
+            if val_penultimate != val_last:
+                print(val_penultimate)
 
 
 if __name__ == "__main__":
