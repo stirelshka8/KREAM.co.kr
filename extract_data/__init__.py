@@ -1,6 +1,5 @@
 import requests
 import configparser
-import pandas as pd
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -37,6 +36,7 @@ def _extract_page():
 def _extract_data():
     counter = 1
     export_list = []
+    dict_size = {}
 
     for extractus in _extract_page():
         print(f'Обрабатывается {counter} страница из {data_list[2]}')
