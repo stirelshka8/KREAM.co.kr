@@ -1,6 +1,5 @@
 import requests
 import configparser
-import pandas as pd
 
 config = configparser.ConfigParser()
 config.read("config.ini")

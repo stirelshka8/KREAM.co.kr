@@ -1,7 +1,7 @@
 import openpyxl
 import configparser
 from datetime import datetime
-from updater import _extract_data
+from extract_data import _extract_data
 from openpyxl.writer.excel import save_workbook
 
 config = configparser.ConfigParser()
@@ -39,5 +39,6 @@ def save():
         for j, value in enumerate(row, 1):
             ws.cell(row=i, column=j).value = value
 
-    save_workbook(wb, f"{config['CONFIG']['save']}.xlsx")
+    save_workbook(wb, FILE_NAME)
 
+save()
