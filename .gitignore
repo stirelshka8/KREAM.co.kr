@@ -2,3 +2,5 @@
 /venv/
 /analytics.xlsx
 /geckodriver.log
+/config.ini
+/*.ini
