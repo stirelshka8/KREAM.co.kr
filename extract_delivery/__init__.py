@@ -22,3 +22,6 @@ def __extract_size__(que):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     return response.json()['sets'][0]['dimensions']
+
+if __name__:
+    print(__name__)
