@@ -4,3 +4,4 @@
 /geckodriver.log
 /config.ini
 /*.ini
+/test.py
