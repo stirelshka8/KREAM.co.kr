@@ -65,7 +65,7 @@ def save_analytic():
                      f"{datetime.now().hour}-" \
                      f"{datetime.now().minute}"
     columns = ['ССЫЛКА', 'НАИМЕНОВАНИЕ', 'АРТИКУЛ', 'ПОСЛЕДНЕЕ ПРЕДЛОЖЕНИЕ', 'ПОСЛЕДНЯЯ ЦЕНА ПРОДАЖИ', 'ДАТА ВЫПУСКА',
-               'КОЛИЧЕСТВО ЖЕЛАЮЩИХ']
+               'КОЛИЧЕСТВО ЖЕЛАЮЩИХ', 'ЦЕНА ДОСТАВКИ']
 
     try:
         wb = openpyxl.load_workbook(sheet_name)

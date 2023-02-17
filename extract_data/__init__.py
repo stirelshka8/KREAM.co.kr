@@ -1,5 +1,6 @@
 import requests
 import configparser
+import extract_delivery
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -67,7 +68,8 @@ def _extract_data():
                 date_rel = '0'
 
             import_list = [f"https://kream.co.kr/products/{item['release']['id']}", item['release']['name'],
-                           item['release']['style_code'], lowest, last_sale, date_rel, item['counter']['wish_count']]
+                           item['release']['style_code'], lowest, last_sale, date_rel, item['counter']['wish_count'],
+                           extract_delivery.__extract_price__(item['release']['style_code'])]
 
             export_list.append(import_list)
 

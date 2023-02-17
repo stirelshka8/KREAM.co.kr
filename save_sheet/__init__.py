@@ -16,7 +16,7 @@ def save():
                      f"{datetime.now().minute}"
 
     columns = ['ССЫЛКА', 'НАИМЕНОВАНИЕ', 'АРТИКУЛ', 'ПОСЛЕДНЕЕ ПРЕДЛОЖЕНИЕ', 'ПОСЛЕДНЯЯ ЦЕНА ПРОДАЖИ', 'ДАТА ВЫПУСКА',
-               'КОЛИЧЕСТВО ЖЕЛАЮЩИХ']
+               'КОЛИЧЕСТВО ЖЕЛАЮЩИХ', 'ЦЕНА ДОСТАВКИ']
 
     FILE_NAME = f"{config['CONFIG']['save']}.xlsx"
     SHEET_NAME = f"{config['CONFIG']['search']}_{enter_datatime}"

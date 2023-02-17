@@ -3,7 +3,7 @@ import configparser
 from bs4 import BeautifulSoup
 
 config = configparser.ConfigParser()
-config.read("../config.ini")
+config.read("config.ini")
 
 
 def __extract_size__(articular):
@@ -79,7 +79,8 @@ def __extract_price__(articular=None):
             'Origin': 'https://ems.epost.go.kr',
             'Referer': 'https://ems.epost.go.kr/front.EmsDeliveryDelivery09.postal',
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/110.0',
-            'Cookie': 'JSESSIONID=QqCJ3Pmy30Ix1S0aiBu41nQChv2jZHncCcYyO8OZbk0Chi8MbXYUO5zHiUF1GWjO.epost3_servlet_parcel; clientid=070081942957'
+            'Cookie': 'JSESSIONID=QqCJ3Pmy30Ix1S0aiBu41nQChv2jZHncCcYyO8OZbk0Chi8MbXYUO5zHiUF1GWjO'
+                      '.epost3_servlet_parcel; clientid=070081942957'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -91,4 +92,4 @@ def __extract_price__(articular=None):
         print("Артикул товара не определен")
 
 
-print(__extract_price__(76059))
+
