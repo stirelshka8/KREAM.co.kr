@@ -67,11 +67,21 @@ def _extract_data():
             else:
                 date_rel = '0'
 
+            try:
+                price_extract = extract_delivery.__extract_price__(item['release']['style_code'])
+            except:
+                price_extract = "None"
+
             import_list = [f"https://kream.co.kr/products/{item['release']['id']}", item['release']['name'],
                            item['release']['style_code'], lowest, last_sale, date_rel, item['counter']['wish_count'],
-                           extract_delivery.__extract_price__(item['release']['style_code'])]
+                           price_extract]
+
+            #--------------------
+            print(import_list)
+            #--------------------
 
             export_list.append(import_list)
+
 
         counter += 1
 
