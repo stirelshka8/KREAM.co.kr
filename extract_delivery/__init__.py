@@ -19,16 +19,19 @@ def __extract_size__(articular):
         'User-Agent': "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0",
         'Content-Type': "application/x-www-form-urlencoded"
     }
-
-    response = requests.request("POST", url, headers=headers, data=payload, proxies=proxies)
-    print(response.text)
-    return response.json()['sets'][0]['dimensions']
+    try:
+        response = requests.request("POST", url, headers=headers, data=payload, proxies=proxies)
+        return response.json()['sets'][0]['dimensions']
+    except requests.exceptions.ProxyError:
+        print("Ошибка PROXY!!!!")
 
 
 def __extract_price__(articular=None):
+    artic_list = []
     if articular is not None:
-        weight_start = round(__extract_size__(articular)['weight'], 1)
-
+        artic_list.append(__extract_size__(articular))
+        converted_final_weight = 0
+        weight_start = round(artic_list[0]['weight'], 1)
         if (weight_start % 1) < 0.5:
             converted_weight_start = float(f"{int(weight_start)}.5")
         elif (weight_start % 1) > 0.5:
@@ -36,19 +39,18 @@ def __extract_price__(articular=None):
         else:
             converted_weight_start = int(weight_start)
 
-        width = int(__extract_size__(articular)['width']) + 2
-        length = int(__extract_size__(articular)['depth']) + 2
-        height = int(__extract_size__(articular)['height']) + 2
-        final_weight = 0
+        width = int(artic_list[0]['width']) + 2
+        length = int(artic_list[0]['depth']) + 2
+        height = int(artic_list[0]['height']) + 2
         temp_weight = round((width * length * height) / 6000, 1)
 
         if (temp_weight % 1) < 0.5:
-            final_weight = float(f"{int(temp_weight)}.5")
+            converted_final_weight = float(f"{int(temp_weight)}.5")
         elif (temp_weight % 1) > 0.5:
-            final_weight = int(f"{int(temp_weight) + 1}")
+            converted_final_weight = int(f"{int(temp_weight)}")
 
-        if final_weight < converted_weight_start:
-            final_weight = converted_weight_start
+        if converted_final_weight < converted_weight_start:
+            converted_final_weight = converted_weight_start
 
         url = "https://ems.epost.go.kr/front.EmsDeliveryDelivery09.postal"
         payload = f"cmd=compute&" \
@@ -67,14 +69,26 @@ def __extract_price__(articular=None):
                   f"vwidth={width}&" \
                   f"vlength={length}&" \
                   f"vheight={height}&" \
-                  f"cal_weight={final_weight}&" \
-                  f"weight={int(final_weight * 1000)}"
+                  f"cal_weight={converted_final_weight}&" \
+                  f"weight={int(converted_final_weight * 1000)}"
 
-        response = requests.request("POST", url, data=payload)
+        headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Host': 'ems.epost.go.kr',
+            'Origin': 'https://ems.epost.go.kr',
+            'Referer': 'https://ems.epost.go.kr/front.EmsDeliveryDelivery09.postal',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/110.0',
+            'Cookie': 'JSESSIONID=QqCJ3Pmy30Ix1S0aiBu41nQChv2jZHncCcYyO8OZbk0Chi8MbXYUO5zHiUF1GWjO.epost3_servlet_parcel; clientid=070081942957'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
         soup = BeautifulSoup(response.text, "html.parser")
-        print(soup.find("div", class_="over_h m_b_40")) #!!!!!!!!!!!!!!!!!!!!! Доделать здесь
+        exit_data = (soup.find(class_="table_row v2").findAll(class_="blue2")[1]).text
+        format_data_price = exit_data.split(" ")
+        return format_data_price[0]
     else:
         print("Артикул товара не определен")
 
 
-__extract_price__(76059)
+print(__extract_price__(76059))
