@@ -6,7 +6,6 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 search = config['CONFIG']['search']
-temer = float(config['CONFIG']['timer'])
 
 start_url = f"https://kream.co.kr/api/p/products?keyword={search}&per_page=50&cursor=1"
 
@@ -37,7 +36,6 @@ def _extract_page():
 def _extract_data():
     counter = 1
     export_list = []
-    dict_size = {}
 
     for extractus in _extract_page():
         print(f'Обрабатывается {counter} страница из {data_list[2]}')
@@ -75,13 +73,7 @@ def _extract_data():
             import_list = [f"https://kream.co.kr/products/{item['release']['id']}", item['release']['name'],
                            item['release']['style_code'], lowest, last_sale, date_rel, item['counter']['wish_count'],
                            price_extract]
-
-            #--------------------
-            print(import_list)
-            #--------------------
-
             export_list.append(import_list)
-
 
         counter += 1
 

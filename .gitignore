@@ -1,6 +1,6 @@
 /test.xlsx
 /venv/
-/analytics.xlsx
+/*.xlsx
 /geckodriver.log
 /config.ini
 /*.ini

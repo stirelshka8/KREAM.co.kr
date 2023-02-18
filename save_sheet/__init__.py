@@ -39,4 +39,3 @@ def save():
             ws.cell(row=i, column=j).value = value
 
     save_workbook(wb, FILE_NAME)
-
