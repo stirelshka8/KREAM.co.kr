@@ -1,5 +1,31 @@
-# Парсер корейской торговой площадки https://kream.co.kr
+# ПАРСЕР товаров корейской торговой площадки www.cream.co.kr
 
-![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white) ![Linux Mint](https://img.shields.io/badge/Linux%20Mint-87CF3E?style=for-the-badge&logo=Linux%20Mint&logoColor=white) ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white) ![Linux Mint](https://img.shields.io/badge/Linux%20Mint-87CF3E?style=for-the-badge&logo=Linux%20Mint&logoColor=white) ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-# В данное время парсер полностью перерабатывается!!!
+## Описание:
+Парсер товаров корейской торговой площадки www.cream.co.kr (далее - ПАРСЕР), собирает информацию по введенным в конфигурционном файле (config.ini) критериям поиска в отдельный XLSX файл (при каждом новом запуске будет создаваться не новый файл, а новый лист документа). Возможен сбор информации сразу-же с ценой доставки в Российскую Федерацию, но данный процесс очень сильно увеличивает время работы парсера и не всегда работает корректно, так ка по ответу службы поддержки сайта https://brickset.com/ из РФ идет очень много ПЛОХОГО трафика и они блокируют работу API сервиса и приходится использовать магию PROXY. Далее собранную информацию возможно проанализировать запустив процесс аналитики, при данном действии будет создан новый файл куда будут сохраниться позиции товаров которые изменились (сравниваются ПОСЛЕДНИЙ и ПРЕДПОСЛЕДНИЙ лист в файле). 
+
+![Ответ службы поддержки](md/001.jpg)
+
+### Запуск:
+ Установка необходимых зависимостей в Linux
+
+ ```shell
+pip3 install -r /ПУТЬ/ДО/СКРИПТА/req.txt 
+``` 
+
+ Установка необходимых зависимостей в Windows
+
+ ```shell
+pip install -r /ПУТЬ/ДО/СКРИПТА/req.txt 
+``` 
+
+ 1. При первоначальном запуске программы парсинга товаров корейской торговой площадки www.cream.co.kr (далее - ПАРСЕР), будет предложено произвести первоначальную настройку парсера посредством записи в файл конфигурации (config.ini) необходимых регистрационных данных. Данное действие необходимо производить только при первом включинии или при удалении файла конфигурации.
+ 2. Следующие включения будут происходить в штатном режиме, миную настройку.
+ ![Работа парсера](md/002.jpg)
+3. Режимы выбираются посредством ввода цифрового значения в поле "Выбранный режим >" и подтверждения ввода клавишей "Enter".
+
+
+
+
+
