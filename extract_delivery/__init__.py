@@ -27,9 +27,8 @@ def __extract_size__(articular):
 
 def __extract_price__(articular=None):
     artic_list = __extract_size__(articular)
-    reformat_weight = round(artic_list[3]/1000, 1)
-
-
+    reformat_weight = round(artic_list[3] / 1000, 1)
+    calibrate_weight = (int(artic_list[0] + 2) * (int(artic_list[1] + 2)) * (int(artic_list[2] + 2))) / 6000
 
     url = "https://ems.epost.go.kr/front.EmsDeliveryDelivery09.postal"
     payload = f"cmd=compute&" \
@@ -45,11 +44,11 @@ def __extract_price__(articular=None):
               f"frnTranspPartyDivCd=1&" \
               f"nation=RU&" \
               f"realWght={reformat_weight}&" \
-              f"vwidth={1}&" \
-              f"vlength={1}&" \
-              f"vheight={1}&" \
-              f"cal_weight={1}&" \
-              f"weight={1}"
+              f"vwidth={int(artic_list[0] + 2)}&" \
+              f"vlength={int(artic_list[1] + 2)}&" \
+              f"vheight={int(artic_list[2] + 2)}&" \
+              f"cal_weight={calibrate_weight}&" \
+              f"weight={int(reformat_weight * 1000)}"
 
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -69,6 +68,3 @@ def __extract_price__(articular=None):
     print(payload)
 
     return format_data_price[0]
-
-
-print(__extract_price__(10218))

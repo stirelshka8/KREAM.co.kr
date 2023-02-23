@@ -73,6 +73,7 @@ def _extract_data():
             import_list = [f"https://kream.co.kr/products/{item['release']['id']}", item['release']['name'],
                            item['release']['style_code'], lowest, last_sale, date_rel, item['counter']['wish_count'],
                            price_extract]
+            print(import_list)
             export_list.append(import_list)
 
         counter += 1
