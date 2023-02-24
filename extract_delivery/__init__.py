@@ -19,6 +19,11 @@ def __extract_size__(articular):
     edited_output_size = exit_data_size.split(" ")
     edited_output_weight = exit_data_weight[0:-1]
 
+    print([float(edited_output_size[0]),
+            float(edited_output_size[2]),
+            float(edited_output_size[4]),
+            float(edited_output_weight)])
+
     return [float(edited_output_size[0]),
             float(edited_output_size[2]),
             float(edited_output_size[4]),
@@ -29,6 +34,12 @@ def __extract_price__(articular=None):
     artic_list = __extract_size__(articular)
     reformat_weight = round(artic_list[3] / 1000, 1)
     calibrate_weight = (int(artic_list[0] + 2) * (int(artic_list[1] + 2)) * (int(artic_list[2] + 2))) / 6000
+
+    if calibrate_weight > reformat_weight:
+        set_weight = calibrate_weight
+    else:
+        set_weight = reformat_weight
+
 
     url = "https://ems.epost.go.kr/front.EmsDeliveryDelivery09.postal"
     payload = f"cmd=compute&" \
@@ -48,7 +59,7 @@ def __extract_price__(articular=None):
               f"vlength={int(artic_list[1] + 2)}&" \
               f"vheight={int(artic_list[2] + 2)}&" \
               f"cal_weight={calibrate_weight}&" \
-              f"weight={int(reformat_weight * 1000)}"
+              f"weight={int(set_weight * 1000)}"
 
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -65,6 +76,6 @@ def __extract_price__(articular=None):
     soup = BeautifulSoup(response.text, "html.parser")
     exit_data = (soup.find(class_="table_row v2").findAll(class_="blue2")[1]).text
     format_data_price = exit_data.split(" ")
-    print(payload)
 
     return format_data_price[0]
+

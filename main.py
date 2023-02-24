@@ -19,12 +19,12 @@ if os.path.exists("config.ini"):
 
     print(f"""     
 Режим работы:
-     3 - запуск процесса сбора данных;
-     4 - запуск процесса анализа данных.\n\n""")
+     1 - запуск процесса сбора данных;
+     2 - запуск процесса анализа данных.\n\n""")
     mode = input("Выбранный режим > ")
-    if mode == "3":
+    if mode == "1":
         save_sheet.save()
-    elif mode == "4":
+    elif mode == "2":
         analytic.save_analytic()
     else:
         print("Что то пошло не так!")
